@@ -289,10 +289,6 @@ font-size:.95rem;
 <p>Carregando nossa história...</p>
 </div>
 
-<button id="startSite">
-Entrar ❤️
-</button>
-
 <canvas id="petals"></canvas>
 
 <section class="hero">
@@ -609,7 +605,7 @@ onclick="toggleMusic()">
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-
+    
 // LOADING
 
 window.addEventListener("load",()=>{
@@ -739,14 +735,23 @@ player.playVideo();
 
 }
 
-document.getElementById("startSite").onclick = () => {
+onReady:(event)=>{
 
-    player.playVideo();
+event.target.setVolume(60);
 
-    document.getElementById("loader").style.display = "none";
+event.target.playVideo();
+
+document.addEventListener('click', () => {
+
+    if(player){
+
+        player.playVideo();
+
+    }
+
+}, { once:true });
 
 }
-
 
 // MENSAGEM ESPECIAL
 
