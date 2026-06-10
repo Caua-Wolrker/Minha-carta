@@ -626,7 +626,8 @@ document.getElementById("loader").style.display="none";
 
 // CONTADOR
 
-const startDate = new Date("2025-10-04T08:00:00");
+const startDate = new Date(2025, 9, 4, 8, 0, 0);
+// Atenção: em JavaScript outubro = 9
 
 function updateCounter() {
 
@@ -635,6 +636,25 @@ function updateCounter() {
     let years = now.getFullYear() - startDate.getFullYear();
     let months = now.getMonth() - startDate.getMonth();
     let days = now.getDate() - startDate.getDate();
+
+    let hours = now.getHours() - startDate.getHours();
+    let minutes = now.getMinutes() - startDate.getMinutes();
+    let seconds = now.getSeconds() - startDate.getSeconds();
+
+    if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+    }
+
+    if (minutes < 0) {
+        minutes += 60;
+        hours--;
+    }
+
+    if (hours < 0) {
+        hours += 24;
+        days--;
+    }
 
     if (days < 0) {
         months--;
@@ -649,13 +669,9 @@ function updateCounter() {
     }
 
     if (months < 0) {
-        years--;
         months += 12;
+        years--;
     }
-
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
 
     document.getElementById("years").innerText = years;
     document.getElementById("months").innerText = months;
