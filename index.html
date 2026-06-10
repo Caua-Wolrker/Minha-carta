@@ -628,30 +628,39 @@ document.getElementById("loader").style.display="none";
 
 const startDate = new Date("2025-10-04T00:00:00");
 
-function updateCounter(){
+function updateCounter() {
 
-const now = new Date();
+    const now = new Date();
 
-let diff = now - startDate;
+    let diff = now - startDate;
 
-let seconds = Math.floor(diff/1000);
-let minutes = Math.floor(seconds/60);
-let hours = Math.floor(minutes/60);
-let days = Math.floor(hours/24);
+    let totalSeconds = Math.floor(diff / 1000);
 
-const years = Math.floor(days/365);
-const months = Math.floor((days%365)/30);
+    const years = Math.floor(totalSeconds / (365 * 24 * 60 * 60));
+    totalSeconds %= (365 * 24 * 60 * 60);
 
-document.getElementById("years").innerText = years;
-document.getElementById("months").innerText = months;
-document.getElementById("days").innerText = days;
-document.getElementById("hours").innerText = hours;
-document.getElementById("minutes").innerText = minutes;
-document.getElementById("seconds").innerText = seconds;
+    const months = Math.floor(totalSeconds / (30 * 24 * 60 * 60));
+    totalSeconds %= (30 * 24 * 60 * 60);
 
+    const days = Math.floor(totalSeconds / (24 * 60 * 60));
+    totalSeconds %= (24 * 60 * 60);
+
+    const hours = Math.floor(totalSeconds / (60 * 60));
+    totalSeconds %= (60 * 60);
+
+    const minutes = Math.floor(totalSeconds / 60);
+
+    const seconds = totalSeconds % 60;
+
+    document.getElementById("years").innerText = years;
+    document.getElementById("months").innerText = months;
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
 }
 
-setInterval(updateCounter,1000);
+setInterval(updateCounter, 1000);
 updateCounter();
 
 
