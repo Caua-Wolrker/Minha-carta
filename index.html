@@ -709,9 +709,7 @@ events:{
 onReady:(event)=>{
 
 event.target.setVolume(60);
-
 event.target.playVideo();
-
 }
 }
 
@@ -734,18 +732,6 @@ player.pauseVideo();
 player.playVideo();
 
 }
-
-}
-
-document.addEventListener('click', () => {
-
-    if(player){
-
-        player.playVideo();
-
-    }
-
-}, { once:true });
 
 }
 
